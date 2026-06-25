@@ -1,1 +1,21 @@
 @import "tailwindcss";
+
+:root {
+    font-family: "Nunito", sans-serif;
+    background-color: black;
+}
+
+
+
+
+/*
+// <weight>: Use a value from 200 to 1000
+// <uniquifier>: Use a unique and descriptive class name
+
+.nunito-<uniquifier> {
+    font-family: "Nunito", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: <weight>;
+    font-style: normal;
+}
+*/
