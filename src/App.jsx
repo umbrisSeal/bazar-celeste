@@ -1,4 +1,4 @@
-import { Package } from "lucide-react";
+import { Package, ShoppingBag } from "lucide-react";
 
 function App() {
     const fechaActual = new Date();
@@ -21,31 +21,38 @@ function App() {
     const mesActual = meses[fechaActual.getMonth()];
 
     return <>
+    
         {/* Header fijo */}
         <header>
-            <div className="flex justify-between py-4 px-6 bg-header">
-                <div>
-                    <div>
-                        <p> Icono shopping </p>
+            <div className="flex justify-between items-center py-4 px-6 bg-header text-header">
+                {/* Left */}
+                <div className="flex items-center gap-4">
+                    <div className="bg-orange-500 text-white w-12 h-12 rounded-xl flex items-center justify-center">
+                        <ShoppingBag />
                     </div>
-                    <div className="text-white">
-                        <h1> El Bazar de <span className="text-yellow-300"> Celeste </span> </h1>
-                        <h2 className="uppercase text-sm"> Tarjetas · Electrónica · Coleccionables · Y Más </h2>
+                    <div>
+                        <h1 className="font-black text-4xl text-white"> El Bazar de <span className="text-yellow-300"> Celeste </span> </h1>
+                        <h2 className="uppercase text-sm tracking-wider font-semibold"> Tarjetas · Electrónica · Coleccionables · Y Más </h2>
                     </div>
                 </div>
-                <div className="flex gap-4 uppercase text-sm">
-                    <div className="flex gap-2">
-                        <Package />
-                        <p> 12 Articulos </p>
+
+                {/* Right */}
+                <div className="flex gap-4 uppercase text-sm tracking-wider font-semibold">
+                    <div className="flex items-center gap-2">
+                        <Package size={18} />
+                        <p> 12 Artículos </p>
                     </div>
                     <p> | </p>
                     <p> Precios en MXN · IVA Incluido </p>
                 </div>
             </div>
-            <div className="bg-header-banner text-white py-2 px-6 font-semibold text-sm tracking-wider">
+
+            <div className="bg-orange-500 text-white py-2 px-6 font-semibold text-sm tracking-wider">
                 <p className="uppercase"> {`Catálogo Completo — Actualizado ${mesActual} ${añoActual}`} </p>
             </div>
         </header>
+
+
         {/* Catalogo de Productos */}
         <main>
             <p> Catalogo </p>

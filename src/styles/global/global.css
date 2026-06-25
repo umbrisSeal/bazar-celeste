@@ -5,12 +5,12 @@
     background-color: #19988A;
 }
 
-.bg-header-banner {
-    background-color: #FF6736;
-}
-
 .bg-header {
     background-color: #094942;
+}
+
+.text-header {
+    color: #588683;
 }
 
 
