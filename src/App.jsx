@@ -1,6 +1,16 @@
 
 function App() {
-    return <h1 className="font-bold bg-black text-white"> Hola mundo </h1>
+    return <>
+        <p> Hola mundo </p>
+        {/* Header fijo */}
+        <header></header>
+        {/* Catalogo de Productos */}
+        <main></main>
+        {/* Metodos de Pago y de Entrega */}
+        <section></section>
+        {/* Footer con contacto */}
+        <footer></footer>
+    </>
 }
 
 export default App;
