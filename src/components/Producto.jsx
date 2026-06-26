@@ -23,7 +23,7 @@ function Producto({inventario = 0, precioOriginal = 0, precioActual = 0, descrip
 
     return <div className='bg-white w-65 h-90 rounded-xl shadow-2xl hover:-translate-y-2 transition-transform duration-200 overflow-hidden flex flex-col'>
         {/* Imagen */}
-        <div className='w-full h-40 relative'>
+        <div className='w-full h-40 relative bg-emerald-700 text-white'>
             <img
                 src={imagenURL}
                 alt={nombre}
