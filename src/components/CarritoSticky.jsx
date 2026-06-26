@@ -39,7 +39,9 @@ function CarritoSticky({ carrito = [] }) {
             <button
                 className={`absolute top-0 right-0 -translate-y-1 -translate-x-1 w-5 h-5 rounded-full flex justify-center items-center bg-red-500 border border-white text-xs text-white font-semibold shadow-2xl cursor-pointer ${carrito.length > 0 ? 'opacity-100' : 'opacity-0'}`}
                 onClick={() => handleBotonCarrito()}>
-                <p> {carrito.length} </p>
+                <p>
+                    {carrito.reduce((contador, producto) => contador + producto.cantidad, 0)}
+                </p>
             </button>
 
             {/* Ventna Emergente */}
@@ -53,13 +55,11 @@ function CarritoSticky({ carrito = [] }) {
                 {
                     carrito.length > 0 ?
                     <div className='text-sm flex-1 overflow-y-scroll'>
-                        <p className='truncate'> <span className='font-bold'> x1 </span> Nombre Producto Aqui </p>
-                        <p className='truncate'> <span className='font-bold'> x1 </span> Nombre Producto Aqui </p>
-                        <p className='truncate'> <span className='font-bold'> x1 </span> Nombre Producto Aqui </p>
-                        <p className='truncate'> <span className='font-bold'> x1 </span> Nombre Producto Aqui </p>
-                        <p className='truncate'> <span className='font-bold'> x1 </span> Nombre Producto Aqui </p>
-                        <p className='truncate'> <span className='font-bold'> x1 </span> Nombre Producto Aqui </p>
-                        <p className='truncate'> <span className='font-bold'> x1 </span> Nombre Producto Aqui </p>
+                        {
+                            carrito.map((producto) =>
+                                <p className='truncate' key={producto.id}> <span className='font-bold'> x{producto.cantidad} </span> {producto.nombre} </p>
+                            )
+                        }
                     </div>
                     :
                     <div className='flex-1 flex items-center justify-center text-sm text-gray-500'>
