@@ -63,6 +63,8 @@ const mockProductos = [
 function App() {
     const [carrito, setCarrito] = useState([]);
 
+    const telefonoCeleste = '525526687957';
+
     function handleAñadirProducto(id = 0) {
         const productoElegido = mockProductos.find(p => p.id === id);
         if(productoElegido === undefined) {
@@ -99,6 +101,32 @@ function App() {
                 return [...prev];
             };
         });
+    };
+
+    function handleBotonOrdenar() {
+        if(carrito.length === 0) {
+            console.log("Error: No hay ningun producto en el carrito.");
+            return;
+        };
+
+        // Generar mensaje URI de carrito:
+        const mensaje = [
+            "¡Hola! deseo ordenar esto:",
+            "",
+            ...carrito.map(producto => `x${producto.cantidad} ${producto.nombre} $${(producto.precioActual * producto.cantidad).toFixed(2)}`),
+            "",
+            `Por un Total de: ${carrito.reduce((t, p) => t + (p.precioActual * p.cantidad), 0).toFixed(2)} MXN`
+        ].join("\n");
+
+        //const mensajeURI = encodeURIComponent(mensaje);
+
+        const linkWA = new URL(`https://wa.me/${telefonoCeleste}`);
+        linkWA.searchParams.set("text", mensaje);
+
+        console.log(`Link de orden generado: ${linkWA}`);
+        console.log("Redirigiendo...");
+        window.open(linkWA.toString(), "_blank");
+        return;
     };
 
     const fechaActual = new Date();
@@ -223,7 +251,7 @@ function App() {
         </footer>
 
         {/* Control Sticky */}
-        <CarritoSticky carrito={carrito} />
+        <CarritoSticky carrito={carrito} fnOrdenar={handleBotonOrdenar} />
     </>
 }
 

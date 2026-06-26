@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react'
 <ShoppingBasket />
 */
 
-function CarritoSticky({ carrito = [] }) {
+function CarritoSticky({ carrito = [], fnOrdenar = () => console.log("Funcion ordenar no definida.") }) {
     const [mostrarProductos, setMostrarProductos] = useState(false);
 
     function handleBotonCarrito() {
@@ -68,6 +68,7 @@ function CarritoSticky({ carrito = [] }) {
                 }
                 <button
                     className={`h-8 text-white font-semibold rounded-lg flex justify-center items-center text-sm ${carrito.length > 0 ? 'bg-green-500 cursor-pointer' : 'bg-gray-500'}`}
+                    onClick={() => fnOrdenar()}
                 >
                     <p> Ordenar por WhatsApp </p>
                 </button>
