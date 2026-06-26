@@ -1,7 +1,7 @@
 import { BanknoteArrowUp, Bitcoin, Coins, Handshake, Landmark, Mails, Package, ShoppingBag, Store, TruckIcon } from "lucide-react";
 import Producto from "./components/Producto";
 import CarritoSticky from "./components/CarritoSticky";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const mockProductos = [
     {
@@ -60,8 +60,36 @@ const mockProductos = [
     },
 ];
 
+const csvURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZ2fK7QAyjJO8fTVYvVOUzihMqlUSKbL50j-6DZ-qCeJFOjbfIrQ0I9MIxxZ8Ms77N2jgdPSfQbp_7/pub?gid=0&single=true&output=csv";
+
 function App() {
     const [carrito, setCarrito] = useState([]);
+
+    useEffect(() => {
+        fetch(csvURL)
+        .then(res => res.text())
+        .then(csv => {
+            const lineas = csv.trim().split("\n");
+
+            // Ignorar la primera linea
+            const catalogo = lineas.slice(1).map(linea => {
+                const [id, nombre, descripcion, precioOriginal, precioActual, inventario, imagenURL] = linea.split(",");
+
+                return {
+                    id,
+                    nombre,
+                    descripcion,
+                    precioOriginal: Number(precioOriginal),
+                    precioActual: Number(precioActual),
+                    inventario: Number(inventario),
+                    imagenURL
+                };
+            });
+
+            console.log(catalogo);
+        });
+
+    }, []);
 
     const telefonoCeleste = '525526687957';
 
