@@ -1,4 +1,5 @@
 import { Package, ShoppingBag } from "lucide-react";
+import Producto from "./components/Producto";
 
 function App() {
     const fechaActual = new Date();
@@ -21,7 +22,7 @@ function App() {
     const mesActual = meses[fechaActual.getMonth()];
 
     return <>
-    
+
         {/* Header fijo */}
         <header>
             <div className="flex justify-between items-center py-4 px-6 bg-header text-header">
@@ -31,7 +32,7 @@ function App() {
                         <ShoppingBag />
                     </div>
                     <div>
-                        <h1 className="font-black text-4xl text-white"> El Bazar de <span className="text-yellow-300"> Celeste </span> </h1>
+                        <h1 className="font-black text-4xl text-white select-none"> El Bazar de <span className="text-yellow-300"> Celeste </span> </h1>
                         <h2 className="uppercase text-sm tracking-wider font-semibold"> Tarjetas · Electrónica · Coleccionables · Y Más </h2>
                     </div>
                 </div>
@@ -54,9 +55,12 @@ function App() {
 
 
         {/* Catalogo de Productos */}
-        <main>
-            <p> Catalogo </p>
+        <main className="p-6">
+            <Producto />
         </main>
+
+
+
         {/* Metodos de Pago y de Entrega */}
         <section>
             <p> Metodos de Pago </p>
