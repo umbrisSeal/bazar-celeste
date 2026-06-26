@@ -1,5 +1,6 @@
 import { BanknoteArrowUp, Bitcoin, Coins, Handshake, Landmark, Mails, Package, ShoppingBag, Store, TruckIcon } from "lucide-react";
 import Producto from "./components/Producto";
+import CarritoSticky from "./components/CarritoSticky";
 
 const mockProductos = [
     {
@@ -204,9 +205,12 @@ function App() {
 
 
         {/* Footer con contacto */}
-        <footer className="bg-header">
-            <p> Footer </p>
+        <footer className="bg-header text-header text-center py-8 uppercase text-sm tracking-wider font-semibold">
+            <p> &copy; El bazar de celeste · Todos los derechos reservados </p>
         </footer>
+
+        {/* Control Sticky */}
+        <CarritoSticky />
     </>
 }
 
