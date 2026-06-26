@@ -3,6 +3,13 @@ import React, { useState } from 'react'
 function Producto() {
     const [unidades, setUnidades] = useState(0);
 
+    const inventario = 3;
+    const precioOriginal = 500;
+    const precioActual = 500;
+    const descuento = Math.ceil(((precioOriginal - precioActual) / precioOriginal) * 100);
+    const nombre = "Tarjeta Regalo Amazon $500";
+    const descripcion = "Boys trying to touch my junk. dede deded eded edoe odekd okwpeokwpo kepdokw dpowek dpowked pokwedop we";
+
     function handleAgregarUnidades(agregarBool) {
         if(agregarBool) {
             if(unidades < 10) {
@@ -21,22 +28,25 @@ function Producto() {
 
     return <div className='bg-white w-65 h-90 rounded-xl shadow-2xl hover:-translate-y-2 transition-transform duration-200 overflow-hidden flex flex-col'>
         {/* Imagen */}
-        <div className='w-full h-40'>
+        <div className='w-full h-40 relative'>
             <img
                 src='https://www.kroger.com/product/images/large/front/0000000816057'
-                alt='Titulo de Imagen'
+                alt={nombre}
                 className='w-full h-full object-cover'
             />
+            <div className={`absolute top-3 right-3 bg-green-500 text-white px-3 py-1 rounded-full font-extrabold text-sm shadow-md ${descuento > 0 ? 'opacity-100' : 'opacity-0'}`}>
+                {`- ${descuento} %`}
+            </div>
         </div>
         {/* Informacion */}
         <div className='w-full flex-1 p-3 bg-gray-100 flex flex-col justify-between select-none'>
             <div className='flex flex-col gap-2'>
-                <p className='font-bold text-base'> Tarjeta Regalo Amazon $500 </p>
+                <p className='font-bold text-base'> {nombre} </p>
                 <p
                     className='text-sm line-clamp-2 text-gray-500'
-                    title='Este es mi tooltip'
+                    title={descripcion}
                 >
-                    Boys trying to touch my junk. dede deded eded edoe odekd okwpeokwpo kepdokw dpowek dpowked pokwedop we
+                    {descripcion}
                 </p>
             </div>
 
@@ -59,12 +69,16 @@ function Producto() {
 
                 <hr className='text-gray-300' />
                 <div>
-                    <p className='text-xs'> <span className='line-through'> $500.00 </span> MXN </p>
+                    <p className={`text-xs ${descuento > 0 ? 'opacity-100' : 'opacity-0'}`}>
+                        <span className='line-through'>${precioOriginal.toFixed(2)} </span> MXN
+                    </p>
                     <div className='flex justify-between items-center text-xs uppercase'>
                         <p className='font-semibold text-gray-500'>
-                            <span className='text-lg text-orange-500 font-black'> $300.00</span> MXN
+                            <span className='text-lg text-orange-500 font-black'> ${precioActual.toFixed(2)}</span> MXN
                         </p>
-                        <p className='text-green-600 font-extrabold'> + 5 en stock </p>
+                        <p className={`${inventario > 2 ? 'text-green-600' : 'text-red-500'} font-extrabold`}>
+                            {`${inventario > 5 ? '+ 5' : `${inventario}`} en stock`}
+                        </p>
                     </div>
                 </div>
             </div>

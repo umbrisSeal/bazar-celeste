@@ -1,6 +1,22 @@
 import { Package, ShoppingBag } from "lucide-react";
 import Producto from "./components/Producto";
 
+const mockProductos = [
+
+];
+
+/*
+Cada producto debe de tener:
+- imagen o conjunto de imagenes
+- titulo
+- descripcion
+- precio original
+- precio actual
+- cantidad de stock
+*/
+
+
+
 function App() {
     const fechaActual = new Date();
     const meses = [
