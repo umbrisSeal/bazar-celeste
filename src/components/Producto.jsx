@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-function Producto({inventario = 0, precioOriginal = 0, precioActual = 0, descripcion = 'Sin Descripcion', imagenURL = '', nombre = 'Sin Nombre'}) {
+function Producto({inventario = 0, precioOriginal = 0, precioActual = 0, descripcion = 'Sin Descripcion', imagenURL = '', nombre = 'Sin Nombre', fnAñadir = () => console.log("Funcion agregar no definida."), fnBorrar = () => console.log("Funcion borrar no definida."), id }) {
     const [unidades, setUnidades] = useState(0);
 
     const descuento = Math.ceil(((precioOriginal - precioActual) / precioOriginal) * 100);
@@ -9,12 +9,14 @@ function Producto({inventario = 0, precioOriginal = 0, precioActual = 0, descrip
         if(agregarBool) {
             if(unidades < 10) {
                 setUnidades(unidades + 1);
+                fnAñadir(id);
             } else {
                 setUnidades(10);
             }
         } else {
             if(unidades > 0) {
-                setUnidades(unidades - 1)
+                setUnidades(unidades - 1);
+                fnBorrar(id);
             } else {
                 setUnidades(0);
             }

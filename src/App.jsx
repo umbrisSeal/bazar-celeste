@@ -1,6 +1,7 @@
 import { BanknoteArrowUp, Bitcoin, Coins, Handshake, Landmark, Mails, Package, ShoppingBag, Store, TruckIcon } from "lucide-react";
 import Producto from "./components/Producto";
 import CarritoSticky from "./components/CarritoSticky";
+import { useState } from "react";
 
 const mockProductos = [
     {
@@ -13,7 +14,7 @@ const mockProductos = [
         imagenURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXAldbd1V1qlF3FV7162Du3ZtUwhyFLRJhoN04Ce-90waEKHST0ICN2INS&s=10'
     },
     {
-        id: '21212731',
+        id: '212731',
         nombre: 'Tarjeta Regalo Amazon $500',
         descripcion: 'Boys trying to touch my junk. dede deded eded edoe odekd okwpeokwpo kepdokw dpowek dpowked pokwedop we',
         precioOriginal: 500,
@@ -22,7 +23,7 @@ const mockProductos = [
         imagenURL: 'https://www.kroger.com/product/images/large/front/0000000816057'
     },
     {
-        id: '21212731',
+        id: '212',
         nombre: 'Pley 2 Chipeada',
         descripcion: 'Playstation 2 liberado. Incluye +300 juegos.',
         precioOriginal: 1000,
@@ -31,7 +32,7 @@ const mockProductos = [
         imagenURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTizvLntw86HIZiCLKsf2VEBM1tqW3v021RKtZRWAcMdCuoDDuE3nlBYbU&s=10'
     },
     {
-        id: '21212731',
+        id: '3331',
         nombre: 'Pley 2 Chipeada',
         descripcion: 'Playstation 2 liberado. Incluye +300 juegos.',
         precioOriginal: 1000,
@@ -40,7 +41,7 @@ const mockProductos = [
         imagenURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTizvLntw86HIZiCLKsf2VEBM1tqW3v021RKtZRWAcMdCuoDDuE3nlBYbU&s=10'
     },
     {
-        id: '21212731',
+        id: '9921',
         nombre: 'Pley 2 Chipeada',
         descripcion: 'Playstation 2 liberado. Incluye +300 juegos.',
         precioOriginal: 1000,
@@ -49,34 +50,7 @@ const mockProductos = [
         imagenURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTizvLntw86HIZiCLKsf2VEBM1tqW3v021RKtZRWAcMdCuoDDuE3nlBYbU&s=10'
     },
     {
-        id: '21212731',
-        nombre: 'Pley 2 Chipeada',
-        descripcion: 'Playstation 2 liberado. Incluye +300 juegos.',
-        precioOriginal: 1000,
-        precioActual: 890,
-        inventario: 6,
-        imagenURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTizvLntw86HIZiCLKsf2VEBM1tqW3v021RKtZRWAcMdCuoDDuE3nlBYbU&s=10'
-    },
-    {
-        id: '21212731',
-        nombre: 'Pley 2 Chipeada',
-        descripcion: 'Playstation 2 liberado. Incluye +300 juegos.',
-        precioOriginal: 1000,
-        precioActual: 890,
-        inventario: 6,
-        imagenURL: 'https://encrypted-tbn0.gstatic.com/imageANd9GcTizvLntw86HIZiCLKsf2VEBM1tqW3v021RKtZRWAcMdCuoDDuE3nlBYbU&s=10'
-    },
-    {
-        id: '21212731',
-        nombre: 'Pley 2 Chipeada',
-        descripcion: 'Playstation 2 liberado. Incluye +300 juegos.',
-        precioOriginal: 1000,
-        precioActual: 890,
-        inventario: 6,
-        imagenURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTizvLntw86HIZiCLKsf2VEBM1tqW3v021RKtZRWAcMdCuoDDuE3nlBYbU&s=10'
-    },
-    {
-        id: '216677731',
+        id: 'sebom',
         nombre: 'Cuenta Brazzers — 1 año',
         descripcion: 'Sin fecha de expiracion.',
         precioOriginal: 12000,
@@ -86,8 +60,47 @@ const mockProductos = [
     },
 ];
 
-
 function App() {
+    const [carrito, setCarrito] = useState([]);
+
+    function handleAñadirProducto(id = 0) {
+        const productoElegido = mockProductos.find(p => p.id === id);
+        if(productoElegido === undefined) {
+            console.log("Error: No se encontro el producto con ID ", id);
+            return;
+        };
+
+        // Agregar producto o incrementar deseados si ya existe.
+        setCarrito(prev => {
+            const existeProducto = prev.some(p => p.id === id);
+            if(existeProducto) {
+                // El producto existe, buscarlo y solo incrementar +1 en cantidad. Los demas dejarlos igual.
+                return prev.map((producto) => producto.id === id ? {...producto, cantidad: producto.cantidad +1} : producto);
+            } else {
+                // No existe el producto, añadirlo.
+                return [...prev, { id, nombre:  productoElegido.nombre, precioActual: productoElegido.precioActual, cantidad: 1}];
+            }
+        });
+    };
+
+    function handleBorrarProducto(id = 0) {
+        setCarrito(prev => {
+            const productoAEliminar = prev.find(p => p.id === id);
+            if(productoAEliminar != undefined) {
+                if(productoAEliminar.cantidad > 1) {
+                    // Buscar y reducir la cantidad en 1.
+                    return prev.map((producto) => producto.id === id ? {...producto, cantidad: producto.cantidad -1} : producto);
+                } else {
+                    // Buscar y eliminar el producto.
+                    return prev.filter((producto) => producto.id !== id);
+                }
+            } else {
+                console.log(`Error: El producto con ID ${id} no existe actualmente en el carrito.`);
+                return [...prev];
+            };
+        });
+    };
+
     const fechaActual = new Date();
     const meses = [
         "enero",
@@ -145,7 +158,7 @@ function App() {
             {
                 mockProductos
                 .filter((producto) => producto.inventario > 0)
-                .map((p) => <Producto key={p.id} inventario={p.inventario} precioOriginal={p.precioOriginal} precioActual={p.precioActual} descripcion={p.descripcion} nombre={p.nombre} imagenURL={p.imagenURL} />)
+                .map((p) => <Producto key={p.id} id={p.id} inventario={p.inventario} precioOriginal={p.precioOriginal} precioActual={p.precioActual} descripcion={p.descripcion} nombre={p.nombre} imagenURL={p.imagenURL} fnAñadir={handleAñadirProducto} fnBorrar={handleBorrarProducto} />)
             }
         </main>
 
@@ -210,7 +223,7 @@ function App() {
         </footer>
 
         {/* Control Sticky */}
-        <CarritoSticky />
+        <CarritoSticky carrito={carrito} />
     </>
 }
 

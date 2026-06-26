@@ -6,8 +6,7 @@ import React, { useEffect, useState } from 'react'
 <ShoppingBasket />
 */
 
-function CarritoSticky() {
-    const [productos, setProductos] = useState(0);
+function CarritoSticky({ carrito = [] }) {
     const [mostrarProductos, setMostrarProductos] = useState(false);
 
     function handleBotonCarrito() {
@@ -38,9 +37,9 @@ function CarritoSticky() {
 
             {/* Indicador de Items */}
             <button
-                className={`absolute top-0 right-0 -translate-y-1 -translate-x-1 w-5 h-5 rounded-full flex justify-center items-center bg-red-500 border border-white text-xs text-white font-semibold shadow-2xl cursor-pointer ${productos > 0 ? 'opacity-100' : 'opacity-0'}`}
+                className={`absolute top-0 right-0 -translate-y-1 -translate-x-1 w-5 h-5 rounded-full flex justify-center items-center bg-red-500 border border-white text-xs text-white font-semibold shadow-2xl cursor-pointer ${carrito.length > 0 ? 'opacity-100' : 'opacity-0'}`}
                 onClick={() => handleBotonCarrito()}>
-                <p> {productos} </p>
+                <p> {carrito.length} </p>
             </button>
 
             {/* Ventna Emergente */}
@@ -52,7 +51,7 @@ function CarritoSticky() {
                     <hr />
                 </div>
                 {
-                    productos > 0 ?
+                    carrito.length > 0 ?
                     <div className='text-sm flex-1 overflow-y-scroll'>
                         <p className='truncate'> <span className='font-bold'> x1 </span> Nombre Producto Aqui </p>
                         <p className='truncate'> <span className='font-bold'> x1 </span> Nombre Producto Aqui </p>
@@ -68,7 +67,7 @@ function CarritoSticky() {
                     </div>
                 }
                 <button
-                    className={`h-8 text-white font-semibold rounded-lg flex justify-center items-center text-sm ${productos > 0 ? 'bg-green-500 cursor-pointer' : 'bg-gray-500'}`}
+                    className={`h-8 text-white font-semibold rounded-lg flex justify-center items-center text-sm ${carrito.length > 0 ? 'bg-green-500 cursor-pointer' : 'bg-gray-500'}`}
                 >
                     <p> Ordenar por WhatsApp </p>
                 </button>
