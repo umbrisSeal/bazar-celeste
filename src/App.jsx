@@ -63,7 +63,7 @@ function App() {
                 <div className="flex gap-4 uppercase text-sm tracking-wider font-semibold">
                     <div className="flex items-center gap-2">
                         <Package size={18} />
-                        <p> 12 Artículos </p>
+                        <p> {mockProductos.filter((p) => p.inventario > 0).length} Artículos </p>
                     </div>
                     <p> | </p>
                     <p> Precios en MXN · IVA Incluido </p>
@@ -77,8 +77,12 @@ function App() {
 
 
         {/* Catalogo de Productos */}
-        <main className="p-6">
-            <Producto />
+        <main className="p-6 flex gap-8 flex-wrap">
+            {
+                mockProductos
+                .filter((producto) => producto.inventario > 0)
+                .map((p) => <Producto inventario={p.inventario} precioOriginal={p.precioOriginal} precioActual={p.precioActual} descripcion={p.descripcion} nombre={p.nombre} imagenURL={p.imagenURL} />)
+            }
         </main>
 
 
