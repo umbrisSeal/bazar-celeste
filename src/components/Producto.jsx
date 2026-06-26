@@ -53,7 +53,7 @@ function Producto({inventario = 0, precioOriginal = 0, precioActual = 0, descrip
 
             <div className='flex flex-col gap-2'>
 
-                <div className='flex gap-3 justify-end text-sm'>
+                <div className='flex gap-3 justify-end text-sm hidden'>
                     <button
                         className={`font-bold cursor-pointer bg-red-300 text-red-800 border border-red-600 py-1 w-20 rounded-md transition-all duration-300 ${unidades > 0 ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 pointer-events-none'}`}
                         onClick={() => handleAgregarUnidades(false)}
