@@ -21,6 +21,12 @@ function Producto({inventario = 0, precioOriginal = 0, precioActual = 0, descrip
         }
     };
 
+    /*
+        Futuras mejoras
+        - Añadir iconos a los botones de agregar y eliminar, o reemplazarlos por estos. Almenos el de borrar
+        - Cambiar color de fondo del Producto cuando las unidades seleccionadas sean mas de 0.
+    */
+
     return <div className='bg-white w-65 h-90 rounded-xl shadow-2xl hover:-translate-y-2 transition-transform duration-200 overflow-hidden flex flex-col'>
         {/* Imagen */}
         <div className='w-full h-40 relative bg-emerald-700 text-white'>
