@@ -1,65 +1,9 @@
-import { BanknoteArrowUp, Bitcoin, Coins, Handshake, Landmark, Mails, Package, ShoppingBag, Store, TruckIcon } from "lucide-react";
+import { BanknoteArrowUp, Bitcoin, Coins, Handshake, Landmark, Mails, MessageCircleQuestionMark, Package, ShoppingBag, Store, TruckIcon } from "lucide-react";
 import Producto from "./components/Producto";
 import CarritoSticky from "./components/CarritoSticky";
 import { useEffect, useState } from "react";
 import Papa from "papaparse";
-
-const mockProductos = [
-    {
-        id: '01239182731',
-        nombre: 'Cita con Prome VT',
-        descripcion: 'Sesion live de 1 hora con Prome VT. Con foto de recuerdo.',
-        precioOriginal: 1800,
-        precioActual: 1200, 
-        inventario: 1,
-        imagenURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXAldbd1V1qlF3FV7162Du3ZtUwhyFLRJhoN04Ce-90waEKHST0ICN2INS&s=10'
-    },
-    {
-        id: '212731',
-        nombre: 'Tarjeta Regalo Amazon $500',
-        descripcion: 'Boys trying to touch my junk. dede deded eded edoe odekd okwpeokwpo kepdokw dpowek dpowked pokwedop we',
-        precioOriginal: 500,
-        precioActual: 400,
-        inventario: 3,
-        imagenURL: 'https://www.kroger.com/product/images/large/front/0000000816057'
-    },
-    {
-        id: '212',
-        nombre: 'Pley 2 Chipeada',
-        descripcion: 'Playstation 2 liberado. Incluye +300 juegos.',
-        precioOriginal: 1000,
-        precioActual: 890,
-        inventario: 6,
-        imagenURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTizvLntw86HIZiCLKsf2VEBM1tqW3v021RKtZRWAcMdCuoDDuE3nlBYbU&s=10'
-    },
-    {
-        id: '3331',
-        nombre: 'Pley 2 Chipeada',
-        descripcion: 'Playstation 2 liberado. Incluye +300 juegos.',
-        precioOriginal: 1000,
-        precioActual: 890,
-        inventario: 6,
-        imagenURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTizvLntw86HIZiCLKsf2VEBM1tqW3v021RKtZRWAcMdCuoDDuE3nlBYbU&s=10'
-    },
-    {
-        id: '9921',
-        nombre: 'Pley 2 Chipeada',
-        descripcion: 'Playstation 2 liberado. Incluye +300 juegos.',
-        precioOriginal: 1000,
-        precioActual: 890,
-        inventario: 6,
-        imagenURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTizvLntw86HIZiCLKsf2VEBM1tqW3v021RKtZRWAcMdCuoDDuE3nlBYbU&s=10'
-    },
-    {
-        id: 'sebom',
-        nombre: 'Cuenta Brazzers — 1 año',
-        descripcion: 'Sin fecha de expiracion.',
-        precioOriginal: 12000,
-        precioActual: 790,
-        inventario: 1,
-        imagenURL: 'https://www.lateja.cr/resizer/0LBdXZyhYsyl7i1VdYbbL6OQJYs=/arc-anglerfish-arc2-prod-gruponacion/public/SCY6D2OPINETPJ2K57NYHMWWIA.jpg'
-    },
-];
+import { BounceLoader } from "react-spinners";
 
 const csvURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZ2fK7QAyjJO8fTVYvVOUzihMqlUSKbL50j-6DZ-qCeJFOjbfIrQ0I9MIxxZ8Ms77N2jgdPSfQbp_7/pub?gid=0&single=true&output=csv";
 
@@ -67,6 +11,7 @@ function App() {
     const [carrito, setCarrito] = useState([]);
     const [catalogo, setCatalogo] = useState([]);
     const [errorCatalogo, setErrorCatalogo] = useState(false);
+    const [cargando, setCargando] = useState(true);
 
     useEffect(() => {
         fetch(csvURL)
@@ -93,6 +38,9 @@ function App() {
             console.log("Error al consultar el catalogo. Error:");
             console.log(error);
             setErrorCatalogo(true);
+        })
+        .finally(() => {
+            setCargando(false);
         });
 
     }, []);
@@ -216,12 +164,28 @@ function App() {
 
 
         {/* Catalogo de Productos */}
-        <main className="p-6 flex gap-8 flex-wrap">
-            {
-                catalogo
-                .filter((producto) => producto.inventario > 0)
-                .map((p) => <Producto key={p.id} id={p.id} inventario={p.inventario} precioOriginal={p.precioOriginal} precioActual={p.precioActual} descripcion={p.descripcion} nombre={p.nombre} imagenURL={p.imagenURL} fnAñadir={handleAñadirProducto} fnBorrar={handleBorrarProducto} />)
-            }
+        <main className="p-6 flex flex-col justify-center items-center min-h-100">
+            {/* Vista normal, catalogo */}
+            <div className={`flex gap-8 flex-wrap w-full ${cargando || errorCatalogo ? 'hidden' : ''}`}>
+                {
+                    catalogo
+                    .filter((producto) => producto.inventario > 0)
+                    .map((p) => <Producto key={p.id} id={p.id} inventario={p.inventario} precioOriginal={p.precioOriginal} precioActual={p.precioActual} descripcion={p.descripcion} nombre={p.nombre} imagenURL={p.imagenURL} fnAñadir={handleAñadirProducto} fnBorrar={handleBorrarProducto} />)
+                }
+            </div>
+            {/* Vista Cargando */}
+            <div className={`flex flex-col gap-2 items-center justify-center ${cargando ? '' : 'hidden'}`}>
+                <BounceLoader color="#dadada" />
+                <h4 className="text-lg text-white"> Consultando catalogo ... </h4>
+            </div>
+            {/* Vista Error */}
+            <div className={`flex flex-col gap-8 items-center justify-center text-white ${errorCatalogo ? '' : 'hidden'}`}>
+                <MessageCircleQuestionMark size={80} />
+                <div className="flex flex-col justify-center items-center">
+                    <h4 className="text-lg font-bold"> No se ha podido consultar el catalogo </h4>
+                    <p className="text-base"> Actualice la pagina o intentelo mas tarde. </p>
+                </div>
+            </div>
         </main>
 
 
