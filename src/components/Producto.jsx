@@ -1,14 +1,9 @@
 import React, { useState } from 'react'
 
-function Producto() {
+function Producto({inventario = 0, precioOriginal = 0, precioActual = 0, descripcion = 'Sin Descripcion', imagenURL = '', nombre = 'Sin Nombre'}) {
     const [unidades, setUnidades] = useState(0);
 
-    const inventario = 3;
-    const precioOriginal = 500;
-    const precioActual = 500;
     const descuento = Math.ceil(((precioOriginal - precioActual) / precioOriginal) * 100);
-    const nombre = "Tarjeta Regalo Amazon $500";
-    const descripcion = "Boys trying to touch my junk. dede deded eded edoe odekd okwpeokwpo kepdokw dpowek dpowked pokwedop we";
 
     function handleAgregarUnidades(agregarBool) {
         if(agregarBool) {
@@ -30,7 +25,7 @@ function Producto() {
         {/* Imagen */}
         <div className='w-full h-40 relative'>
             <img
-                src='https://www.kroger.com/product/images/large/front/0000000816057'
+                src={imagenURL}
                 alt={nombre}
                 className='w-full h-full object-cover'
             />

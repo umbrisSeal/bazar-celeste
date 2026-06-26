@@ -2,19 +2,25 @@ import { Package, ShoppingBag } from "lucide-react";
 import Producto from "./components/Producto";
 
 const mockProductos = [
-
+    {
+        id: '01239182731',
+        nombre: 'Cita con Prome VT',
+        descripcion: 'Sesion live de 1 hora con Prome VT. Con foto de recuerdo.',
+        precioOriginal: 1800,
+        precioActual: 1200, 
+        inventario: 1,
+        imagenURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXAldbd1V1qlF3FV7162Du3ZtUwhyFLRJhoN04Ce-90waEKHST0ICN2INS&s=10'
+    },
+    {
+        id: '212391242731',
+        nombre: 'Tarjeta Regalo Amazon $500',
+        descripcion: 'Boys trying to touch my junk. dede deded eded edoe odekd okwpeokwpo kepdokw dpowek dpowked pokwedop we',
+        precioOriginal: 500,
+        precioActual: 400,
+        inventario: 3,
+        imagenURL: 'https://www.kroger.com/product/images/large/front/0000000816057'
+    }
 ];
-
-/*
-Cada producto debe de tener:
-- imagen o conjunto de imagenes
-- titulo
-- descripcion
-- precio original
-- precio actual
-- cantidad de stock
-*/
-
 
 
 function App() {
