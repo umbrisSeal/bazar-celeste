@@ -2,6 +2,7 @@ import { BanknoteArrowUp, Bitcoin, Coins, Handshake, Landmark, Mails, Package, S
 import Producto from "./components/Producto";
 import CarritoSticky from "./components/CarritoSticky";
 import { useEffect, useState } from "react";
+import Papa from "papaparse";
 
 const mockProductos = [
     {
@@ -64,29 +65,34 @@ const csvURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZ2fK7QAyjJO8fT
 
 function App() {
     const [carrito, setCarrito] = useState([]);
+    const [catalogo, setCatalogo] = useState([]);
+    const [errorCatalogo, setErrorCatalogo] = useState(false);
 
     useEffect(() => {
         fetch(csvURL)
         .then(res => res.text())
         .then(csv => {
-            const lineas = csv.trim().split("\n");
+            const papaResult = Papa.parse(csv, {
+                header: true,
+                skipEmptyLines: true
+            });
 
-            // Ignorar la primera linea
-            const catalogo = lineas.slice(1).map(linea => {
-                const [id, nombre, descripcion, precioOriginal, precioActual, inventario, imagenURL] = linea.split(",");
-
+            const productosLimpios = papaResult.data.map((producto) => {
                 return {
-                    id,
-                    nombre,
-                    descripcion,
-                    precioOriginal: Number(precioOriginal),
-                    precioActual: Number(precioActual),
-                    inventario: Number(inventario),
-                    imagenURL
+                    ...producto,
+                    precioOriginal: Number(producto.precioOriginal),
+                    precioActual: Number(producto.precioActual),
+                    inventario: Number(producto.inventario)
                 };
             });
 
-            console.log(catalogo);
+            //console.log(productosLimpios);
+            setCatalogo(productosLimpios);
+        })
+        .catch(error => {
+            console.log("Error al consultar el catalogo. Error:");
+            console.log(error);
+            setErrorCatalogo(true);
         });
 
     }, []);
@@ -94,7 +100,7 @@ function App() {
     const telefonoCeleste = '525526687957';
 
     function handleAñadirProducto(id = 0) {
-        const productoElegido = mockProductos.find(p => p.id === id);
+        const productoElegido = catalogo.find(p => p.id === id);
         if(productoElegido === undefined) {
             console.log("Error: No se encontro el producto con ID ", id);
             return;
@@ -196,7 +202,7 @@ function App() {
                 <div className="flex gap-4 uppercase text-sm tracking-wider font-semibold">
                     <div className="flex items-center gap-2">
                         <Package size={18} />
-                        <p> {mockProductos.filter((p) => p.inventario > 0).length} Artículos </p>
+                        <p> {catalogo.filter((p) => p.inventario > 0).length} Artículos </p>
                     </div>
                     <p> | </p>
                     <p> Precios en MXN · IVA Incluido </p>
@@ -212,7 +218,7 @@ function App() {
         {/* Catalogo de Productos */}
         <main className="p-6 flex gap-8 flex-wrap">
             {
-                mockProductos
+                catalogo
                 .filter((producto) => producto.inventario > 0)
                 .map((p) => <Producto key={p.id} id={p.id} inventario={p.inventario} precioOriginal={p.precioOriginal} precioActual={p.precioActual} descripcion={p.descripcion} nombre={p.nombre} imagenURL={p.imagenURL} fnAñadir={handleAñadirProducto} fnBorrar={handleBorrarProducto} />)
             }
