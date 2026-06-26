@@ -12,14 +12,68 @@ const mockProductos = [
         imagenURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXAldbd1V1qlF3FV7162Du3ZtUwhyFLRJhoN04Ce-90waEKHST0ICN2INS&s=10'
     },
     {
-        id: '212391242731',
+        id: '21212731',
         nombre: 'Tarjeta Regalo Amazon $500',
         descripcion: 'Boys trying to touch my junk. dede deded eded edoe odekd okwpeokwpo kepdokw dpowek dpowked pokwedop we',
         precioOriginal: 500,
         precioActual: 400,
         inventario: 3,
         imagenURL: 'https://www.kroger.com/product/images/large/front/0000000816057'
-    }
+    },
+    {
+        id: '21212731',
+        nombre: 'Pley 2 Chipeada',
+        descripcion: 'Playstation 2 liberado. Incluye +300 juegos.',
+        precioOriginal: 1000,
+        precioActual: 890,
+        inventario: 6,
+        imagenURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTizvLntw86HIZiCLKsf2VEBM1tqW3v021RKtZRWAcMdCuoDDuE3nlBYbU&s=10'
+    },
+    {
+        id: '21212731',
+        nombre: 'Pley 2 Chipeada',
+        descripcion: 'Playstation 2 liberado. Incluye +300 juegos.',
+        precioOriginal: 1000,
+        precioActual: 890,
+        inventario: 6,
+        imagenURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTizvLntw86HIZiCLKsf2VEBM1tqW3v021RKtZRWAcMdCuoDDuE3nlBYbU&s=10'
+    },
+    {
+        id: '21212731',
+        nombre: 'Pley 2 Chipeada',
+        descripcion: 'Playstation 2 liberado. Incluye +300 juegos.',
+        precioOriginal: 1000,
+        precioActual: 890,
+        inventario: 6,
+        imagenURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTizvLntw86HIZiCLKsf2VEBM1tqW3v021RKtZRWAcMdCuoDDuE3nlBYbU&s=10'
+    },
+    {
+        id: '21212731',
+        nombre: 'Pley 2 Chipeada',
+        descripcion: 'Playstation 2 liberado. Incluye +300 juegos.',
+        precioOriginal: 1000,
+        precioActual: 890,
+        inventario: 6,
+        imagenURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTizvLntw86HIZiCLKsf2VEBM1tqW3v021RKtZRWAcMdCuoDDuE3nlBYbU&s=10'
+    },
+    {
+        id: '21212731',
+        nombre: 'Pley 2 Chipeada',
+        descripcion: 'Playstation 2 liberado. Incluye +300 juegos.',
+        precioOriginal: 1000,
+        precioActual: 890,
+        inventario: 6,
+        imagenURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTizvLntw86HIZiCLKsf2VEBM1tqW3v021RKtZRWAcMdCuoDDuE3nlBYbU&s=10'
+    },
+    {
+        id: '21212731',
+        nombre: 'Pley 2 Chipeada',
+        descripcion: 'Playstation 2 liberado. Incluye +300 juegos.',
+        precioOriginal: 1000,
+        precioActual: 890,
+        inventario: 6,
+        imagenURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTizvLntw86HIZiCLKsf2VEBM1tqW3v021RKtZRWAcMdCuoDDuE3nlBYbU&s=10'
+    },
 ];
 
 
@@ -81,7 +135,7 @@ function App() {
             {
                 mockProductos
                 .filter((producto) => producto.inventario > 0)
-                .map((p) => <Producto inventario={p.inventario} precioOriginal={p.precioOriginal} precioActual={p.precioActual} descripcion={p.descripcion} nombre={p.nombre} imagenURL={p.imagenURL} />)
+                .map((p) => <Producto key={p.id} inventario={p.inventario} precioOriginal={p.precioOriginal} precioActual={p.precioActual} descripcion={p.descripcion} nombre={p.nombre} imagenURL={p.imagenURL} />)
             }
         </main>
 
