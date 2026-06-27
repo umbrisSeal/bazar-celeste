@@ -147,7 +147,7 @@ function App() {
                 </div>
 
                 {/* Right */}
-                <div className="flex gap-4 uppercase text-sm tracking-wider font-semibold text-center lg:text-left">
+                <div className="flex gap-4 uppercase text-sm tracking-wider justify-center items-center font-semibold text-center lg:text-left">
                     <div className="flex items-center gap-2">
                         <Package size={18} />
                         <p> {catalogo.filter((p) => p.inventario > 0).length} Artículos </p>
