@@ -136,18 +136,18 @@ function App() {
         <header>
             <div className="flex flex-col lg:flex-row gap-4 lg:gap-0 justify-between items-center py-4 px-6 bg-header text-header">
                 {/* Left */}
-                <div className="flex flex-col lg:flex-row items-center gap-4">
+                <div className="flex flex-col lg:flex-row items-center gap-4 text-center lg:text-left">
                     <div className="bg-orange-500 text-white w-12 h-12 rounded-xl flex items-center justify-center">
                         <ShoppingBag />
                     </div>
                     <div>
-                        <h1 className="font-black text-4xl text-white select-none text-center lg:text-left"> El Bazar de <span className="text-yellow-300"> Celeste </span> </h1>
+                        <h1 className="font-black text-4xl text-white select-none"> El Bazar de <span className="text-yellow-300"> Celeste </span> </h1>
                         <h2 className="uppercase text-sm tracking-wider font-semibold"> Tarjetas · Electrónica · Coleccionables · Y Más </h2>
                     </div>
                 </div>
 
                 {/* Right */}
-                <div className="flex gap-4 uppercase text-sm tracking-wider font-semibold">
+                <div className="flex gap-4 uppercase text-sm tracking-wider font-semibold text-center lg:text-left">
                     <div className="flex items-center gap-2">
                         <Package size={18} />
                         <p> {catalogo.filter((p) => p.inventario > 0).length} Artículos </p>
@@ -244,7 +244,7 @@ function App() {
 
 
         {/* Footer con contacto */}
-        <footer className="bg-header text-header text-center py-8 uppercase text-xs lg:text-sm tracking-wider font-semibold">
+        <footer className="bg-header text-header text-center py-8 uppercase text-xs px-6 lg:text-sm tracking-wider font-semibold">
             <p> &copy; El bazar de celeste · Todos los derechos reservados </p>
         </footer>
 
