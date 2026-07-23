@@ -137,8 +137,8 @@ function App() {
             <div className="flex flex-col lg:flex-row gap-4 lg:gap-0 justify-between items-center py-4 px-6 bg-header text-header">
                 {/* Left */}
                 <div className="flex flex-col lg:flex-row items-center gap-4 text-center lg:text-left">
-                    <div className="bg-orange-500 text-white w-12 h-12 rounded-xl flex items-center justify-center">
-                        <ShoppingBag />
+                    <div className="lg:h-20 h-18">
+                        <img src="./Logo_BazarCeleste.png" alt="Logo" className="w-full h-full object-contain" />
                     </div>
                     <div>
                         <h1 className="font-black text-4xl text-white select-none"> El Bazar de <span className="text-yellow-300"> Celeste </span> </h1>
