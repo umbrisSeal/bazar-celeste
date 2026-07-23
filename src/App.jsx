@@ -211,16 +211,18 @@ function App() {
                     </div>
                     <div className="flex flex-col items-center w-50 text-center gap-2">
                         <Coins size={60} />
-                        <p> Deposito Oxxo </p>
+                        <p> Deposito en Efectivo </p>
                     </div>
                     <div className="flex flex-col items-center w-50 text-center gap-2">
                         <BanknoteArrowUp size={60} />
                         <p> Pago Online </p>
                     </div>
+                    {/*
                     <div className="flex flex-col items-center w-50 text-center gap-2">
                         <Bitcoin size={60} />
                         <p> Criptomonedas </p>
                     </div>
+                    */}
                 </div>
             </div>
             <div>
@@ -233,10 +235,6 @@ function App() {
                     <div className="flex flex-col items-center w-50 text-center gap-2">
                         <Mails size={60} />
                         <p> Entrega Digital </p>
-                    </div>
-                    <div className="flex flex-col items-center w-50 text-center gap-2">
-                        <Handshake size={60} />
-                        <p> Entrega Personal </p>
                     </div>
                 </div>
             </div>
